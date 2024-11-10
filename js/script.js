@@ -50,8 +50,8 @@ var userAgent = navigator.userAgent.toLowerCase(),
 		};
 
 /**
- * @desc Check the element was been scrolled into the view
- * @param {object} elem - jQuery object
+ * @desc 
+ * @param {object} 
  * @return {boolean}
  */
 function isScrolledIntoView(elem) {
@@ -60,9 +60,9 @@ function isScrolledIntoView(elem) {
 }
 
 /**
- * @desc Calls a function when element has been scrolled into the view
- * @param {object} element - jQuery object
- * @param {function} func - init function
+ * @desc 
+ * @param {object} 
+ * @param {function} 
  */
 function lazyInit(element, func) {
 	var scrollHandler = function () {
@@ -76,9 +76,7 @@ function lazyInit(element, func) {
 	$window.on('scroll', scrollHandler);
 }
 
-// Initialize scripts that require a loaded window
 $window.on('load', function () {
-	// Material Parallax
 	if (plugins.materialParallax.length) {
 		if (!isNoviBuilder && !isIE && !isMobile) {
 			plugins.materialParallax.parallax();
@@ -93,14 +91,12 @@ $window.on('load', function () {
 	}
 });
 
-/**
- * Initialize All Scripts
- */
+
 $(function () {
 	var isNoviBuilder = window.xMode;
 
 	/**
-	 * @desc Google map function for getting latitude and longitude
+	 * @desc 
 	 */
 	function getLatLngObject(str, marker, map, callback) {
 		var coordinates = {};
@@ -126,7 +122,7 @@ $(function () {
 	}
 
 	/**
-	 * @desc Initialize Google maps
+	 * @desc Inicia Google maps
 	 */
 	function initMaps() {
 		var key;
@@ -154,7 +150,6 @@ $(function () {
 				var styles = plugins.maps[i].hasAttribute('data-styles') ? JSON.parse(plugins.maps[i].getAttribute("data-styles")) : [];
 				var center = plugins.maps[i].getAttribute("data-center") || "New York";
 
-				// Initialize map
 				var map = new google.maps.Map(plugins.maps[i].querySelectorAll(".google-map")[0], {
 					zoom: zoom,
 					styles: styles,
@@ -162,18 +157,15 @@ $(function () {
 					center: {lat: 0, lng: 0}
 				});
 
-				// Add map object to map node
 				plugins.maps[i].map = map;
 				plugins.maps[i].geocoder = geocoder;
 				plugins.maps[i].keySupported = true;
 				plugins.maps[i].google = google;
 
-				// Get Center coordinates from attribute
 				getLatLngObject(center, null, plugins.maps[i], function (location, markerElement, mapElement) {
 					mapElement.map.setCenter(location);
 				});
 
-				// Add markers from google-map-markers array
 				var markerItems = plugins.maps[i].querySelectorAll(".google-map-markers li");
 
 				if (markerItems.length) {
@@ -199,7 +191,6 @@ $(function () {
 							markerElement.gmarker = marker;
 							markers.push({markerElement: markerElement, infoWindow: infoWindow});
 							marker.isActive = false;
-							// Handle infoWindow close click
 							google.maps.event.addListener(infoWindow, 'closeclick', (function (markerElement, mapElement) {
 								var markerIcon = null;
 								markerElement.gmarker.isActive = false;
@@ -208,7 +199,6 @@ $(function () {
 							}).bind(this, markerElement, mapElement));
 
 
-							// Set marker active on Click and open infoWindow
 							google.maps.event.addListener(marker, 'click', (function (markerElement, mapElement) {
 								if (markerElement.infoWindow.getContent().length === 0) return;
 								var gMarker, currentMarker = markerElement.gmarker, currentInfoWindow;
@@ -248,9 +238,9 @@ $(function () {
 	}
 
 	/**
-	 * @desc Initialize the gallery with set of images
-	 * @param {object} itemsToInit - jQuery object
-	 * @param {string} [addClass] - additional gallery class
+	 * @desc 
+	 * @param {object} itemsToInit 
+	 * @param {string} [addClass] 
 	 */
 	function initLightGallery(itemsToInit, addClass) {
 		if (!isNoviBuilder) {
@@ -267,9 +257,9 @@ $(function () {
 	}
 
 	/**
-	 * @desc Initialize the gallery with dynamic addition of images
-	 * @param {object} itemsToInit - jQuery object
-	 * @param {string} [addClass] - additional gallery class
+	 * @desc 
+	 * @param {object} itemsToInit 
+	 * @param {string} [addClass] 
 	 */
 	function initDynamicLightGallery(itemsToInit, addClass) {
 		if (!isNoviBuilder) {
@@ -290,9 +280,9 @@ $(function () {
 	}
 
 	/**
-	 * @desc Initialize the gallery with one image
-	 * @param {object} itemToInit - jQuery object
-	 * @param {string} [addClass] - additional gallery class
+	 * @desc 
+	 * @param {object} itemToInit 
+	 * @param {string} [addClass] 
 	 */
 	function initLightGalleryItem(itemToInit, addClass) {
 		if (!isNoviBuilder) {
@@ -315,12 +305,12 @@ $(function () {
 	}
 
 	/**
-	 * @desc Google map function for getting latitude and longitude
+	 * @desc 
 	 */
 
 	/**
-	 * @desc Toggle swiper videos on active slides
-	 * @param {object} swiper - swiper slider
+	 * @desc 
+	 * @param {object} 
 	 */
 	function toggleSwiperInnerVideos(swiper) {
 		var prevSlide = $(swiper.slides[swiper.previousIndex]),
@@ -339,8 +329,8 @@ $(function () {
 	}
 
 	/**
-	 * @desc Toggle swiper animations on active slides
-	 * @param {object} swiper - swiper slider
+	 * @desc 
+	 * @param {object} 
 	 */
 	function toggleSwiperCaptionAnimation(swiper) {
 		var prevSlide = $(swiper.container).find("[data-caption-animate]"),
@@ -389,8 +379,8 @@ $(function () {
 	}
 
 	/**
-	 * makeParallax
-	 * @description  create swiper parallax scrolling effect
+	 * 
+	 * @description  
 	 */
 	function makeParallax(el, speed, wrapper, prevScroll) {
 		var scrollY = window.scrollY || window.pageYOffset;
@@ -429,8 +419,8 @@ $(function () {
 	}
 
 	/**
-	 * @desc Initialize owl carousel plugin
-	 * @param {object} carousel - carousel jQuery object
+	 * @desc 
+	 * @param {object} 
 	 */
 	function initOwlCarousel(c) {
 		var aliaces = ["-", "-xs-", "-sm-", "-md-", "-lg-", "-xl-"],
@@ -453,7 +443,6 @@ $(function () {
 			}
 		}
 
-		// Enable custom pagination
 		if (c.attr('data-dots-custom')) {
 			c.on("initialized.owl.carousel", function (event) {
 				var carousel = $(event.currentTarget),
@@ -501,8 +490,8 @@ $(function () {
 	}
 
 	/**
-	 * isScrolledIntoView
-	 * @description  check the element whas been scrolled into the view
+	 * 
+	 * @description  
 	 */
 	function isScrolledIntoView(elem) {
 		if (!isNoviBuilder) {
@@ -514,8 +503,8 @@ $(function () {
 	}
 
 	/**
-	 * initOnView
-	 * @description  calls a function when element has been scrolled into the view
+	 * 
+	 * @description 
 	 */
 	function lazyInit(element, func) {
 		var $win = jQuery(window);
@@ -528,8 +517,8 @@ $(function () {
 	}
 
 	/**
-	 * Live Search
-	 * @description  create live search results
+	 * 
+	 * @description  
 	 */
 	function liveSearch(options) {
 		options.live.removeClass('cleared').html();
@@ -558,8 +547,8 @@ $(function () {
 	}
 
 	/**
-	 * attachFormValidator
-	 * @description  attach form validation to elements
+	 * 
+	 * @description  
 	 */
 	function attachFormValidator(elements) {
 		for (var i = 0; i < elements.length; i++) {
@@ -598,19 +587,19 @@ $(function () {
 		var regularConstraintsMessages = [
 			{
 				type: regula.Constraint.Required,
-				newMessage: "The text field is required."
+				newMessage: "O texto é obrigatório."
 			},
 			{
 				type: regula.Constraint.Email,
-				newMessage: "The email is not a valid email."
+				newMessage: "O email não é um email válido."
 			},
 			{
 				type: regula.Constraint.Numeric,
-				newMessage: "Only numbers are required"
+				newMessage: "Somente números por favor."
 			},
 			{
 				type: regula.Constraint.Selected,
-				newMessage: "Please choose an option."
+				newMessage: "Selecione uma opção."
 			}
 		];
 
@@ -626,8 +615,8 @@ $(function () {
 	}
 
 	/**
-	 * isValidated
-	 * @description  check if all elemnts pass validation
+	 * 
+	 * @description  
 	 */
 	function isValidated(elements, captcha) {
 		var results, errors = 0;
@@ -658,8 +647,8 @@ $(function () {
 	}
 
 	/**
-	 * Init Bootstrap tooltip
-	 * @description  calls a function when need to init bootstrap tooltips
+	 * 
+	 * @description  
 	 */
 	function initBootstrapTooltip(tooltipPlacement) {
 		if (window.innerWidth < 599) {
@@ -676,22 +665,21 @@ $(function () {
 
 
 	/**
-	 * Copyright Year
-	 * @description  Evaluates correct copyright year
+	 * 
+	 * @description  
 	 */
 	var o = $("#copyright-year");
 	if (o.length) {
 		o.text(initialDate.getFullYear());
 	}
 
-	// Google maps
 	if (plugins.maps.length) {
 		lazyInit(plugins.maps, initMaps);
 	}
 
 	/**
-	 * Page loader
-	 * @description Enables Page loader
+	 * 
+	 * @description 
 	 */
 	if (plugins.pageLoader.length > 0) {
 		$window.on("load", function () {
@@ -703,8 +691,8 @@ $(function () {
 	}
 
 	/**
-	 * validateReCaptcha
-	 * @description  validate google reCaptcha
+	 * 
+	 * @description  
 	 */
 	function validateReCaptcha(captcha) {
 		var $captchaToken = captcha.find('.g-recaptcha-response').val();
@@ -712,7 +700,7 @@ $(function () {
 		if ($captchaToken == '') {
 			captcha
 					.siblings('.form-validation')
-					.html('Please, prove that you are not robot.')
+					.html('Prove que não é um robô por favor.')
 					.addClass('active');
 			captcha
 					.closest('.form-group')
@@ -741,8 +729,8 @@ $(function () {
 	}
 
 	/**
-	 * onloadCaptchaCallback
-	 * @description  init google reCaptcha
+	 * 
+	 * @description  
 	 */
 	onloadCaptchaCallback = function () {
 		for (i = 0; i < plugins.captcha.length; i++) {
@@ -764,22 +752,22 @@ $(function () {
 	};
 
 	/**
-	 * Google ReCaptcha
-	 * @description Enables Google ReCaptcha
+	 * 
+	 * @description 
 	 */
 	if (plugins.captcha.length) {
 		$.getScript("//www.google.com/recaptcha/api.js?onload=onloadCaptchaCallback&render=explicit&hl=en");
 	}
 
 	/**
-	 * Is Mac os
-	 * @description  add additional class on html if mac os.
+	 * 
+	 * @description  
 	 */
 	if (navigator.platform.match(/(Mac)/i)) $html.addClass("mac-os");
 
 	/**
-	 * IE Polyfills
-	 * @description  Adds some loosing functionality to IE browsers
+	 * 
+	 * @description  
 	 */
 	if (isIE) {
 		if (isIE < 10) {
@@ -806,8 +794,8 @@ $(function () {
 	}
 
 	/**
-	 * Bootstrap Tooltips
-	 * @description Activate Bootstrap Tooltips
+	 * 
+	 * @description 
 	 */
 	if (plugins.bootstrapTooltip.length) {
 		var tooltipPlacement = plugins.bootstrapTooltip.attr('data-placement');
@@ -818,8 +806,8 @@ $(function () {
 	}
 
 	/**
-	 * bootstrapModalDialog
-	 * @description Stap vioeo in bootstrapModalDialog
+	 *
+	 * @description 
 	 */
 	if (plugins.bootstrapModalDialog.length > 0) {
 		var i = 0;
@@ -848,8 +836,8 @@ $(function () {
 	}
 
 	/**
-	 * JQuery mousewheel plugin
-	 * @description  Enables jquery mousewheel plugin
+	 * 
+	 * @description  
 	 */
 	if (plugins.scroller.length) {
 		var i;
@@ -865,8 +853,8 @@ $(function () {
 	}
 
 	/**
-	 * Radio
-	 * @description Add custom styling options for input[type="radio"]
+	 * 
+	 * @description 
 	 */
 	if (plugins.radio.length) {
 		var i;
@@ -877,8 +865,8 @@ $(function () {
 	}
 
 	/**
-	 * Checkbox
-	 * @description Add custom styling options for input[type="checkbox"]
+	 * 
+	 * @description 
 	 */
 	if (plugins.checkbox.length) {
 		var i;
@@ -889,8 +877,8 @@ $(function () {
 	}
 
 	/**
-	 * Popovers
-	 * @description Enables Popovers plugin
+	 * 
+	 * @description 
 	 */
 	if (plugins.popover.length) {
 		if (window.innerWidth < 767) {
@@ -903,8 +891,8 @@ $(function () {
 	}
 
 	/**
-	 * Bootstrap Buttons
-	 * @description  Enable Bootstrap Buttons plugin
+	 * 
+	 * @description  
 	 */
 	if (plugins.statefulButton.length) {
 		$(plugins.statefulButton).on('click', function () {
@@ -917,8 +905,8 @@ $(function () {
 	}
 
 	/**
-	 * UI To Top
-	 * @description Enables ToTop Button
+	 * 
+	 * @description 
 	 */
 	if (isDesktop && !isNoviBuilder) {
 		$().UItoTop({
@@ -928,8 +916,8 @@ $(function () {
 	}
 
 	/**
-	 * RD Navbar
-	 * @description Enables RD Navbar plugin
+	 * 
+	 * @description 
 	 */
 	if (plugins.rdNavbar.length) {
 		plugins.rdNavbar.RDNavbar({
@@ -976,7 +964,6 @@ $(function () {
 
 	}
 
-	// Custom sidebar animation
 
 	$window.on("load resize", function () {
 		var windowWidth = window.innerWidth,
@@ -1016,8 +1003,8 @@ $(function () {
 
 
 	/**
-	 * RD Search
-	 * @description Enables search
+	 * 
+	 * @description 
 	 */
 	if (plugins.search.length || plugins.searchResults) {
 		var handler = "bat/rd-search.php";
@@ -1110,8 +1097,8 @@ $(function () {
 
 
 	/**
-	 * ViewPort Universal
-	 * @description Add class in viewport
+	 * 
+	 * @description 
 	 */
 	if (plugins.viewAnimate.length) {
 		var i;
@@ -1127,7 +1114,6 @@ $(function () {
 	}
 
 
-	// Swiper
 	if (plugins.swiper.length) {
 		for (var i = 0; i < plugins.swiper.length; i++) {
 			var s = $(plugins.swiper[i]);
@@ -1191,7 +1177,6 @@ $(function () {
 	}
 
 
-	// Owl carousel
 	if ( plugins.owl.length ) {
 		for ( var i = 0; i < plugins.owl.length; i++ ) {
 			var carousel = $( plugins.owl[ i ] );
@@ -1202,7 +1187,7 @@ $(function () {
 
 	/**
 	 * Isotope
-	 * @description Enables Isotope plugin
+	 * @description 
 	 */
 	if (plugins.isotope.length) {
 		var i, isogroup = [];
@@ -1248,8 +1233,7 @@ $(function () {
 	}
 
 	/**
-	 * WOW
-	 * @description Enables Wow animation plugin
+	 * @description 
 	 */
 	if (isDesktop && $html.hasClass("wow-animation") && $(".wow").length) {
 		new WOW().init();
@@ -1264,15 +1248,12 @@ $(function () {
 		for (i = 0; i < plugins.bootstrapTabs.length; i++) {
 			var bootstrapTabsItem = $(plugins.bootstrapTabs[i]);
 
-			//If have owl carousel inside tab - resize owl carousel on click
 			if (bootstrapTabsItem.find('.owl-carousel').length) {
-				// init first open tab
 
 				var carouselObj = bootstrapTabsItem.find('.tab-content .tab-pane.active .owl-carousel');
 
 				initOwlCarousel(carouselObj);
 
-				//init owl carousel on tab change
 				bootstrapTabsItem.find('.nav-custom a').on('click', $.proxy(function () {
 					var $this = $(this);
 
@@ -1294,7 +1275,6 @@ $(function () {
 				}, bootstrapTabsItem));
 			}
 
-			//If have slick carousel inside tab - resize slick carousel on click
 			if (bootstrapTabsItem.find('.slick-slider').length) {
 				bootstrapTabsItem.find('.tabs-custom-list > li > a').on('click', $.proxy(function () {
 					var $this = $(this);
@@ -1573,7 +1553,6 @@ $(function () {
 			var $slickItem = $(plugins.slick[i]);
 
 			$slickItem.slick({
-				// adaptiveHeight: true,
 				slidesToScroll: parseInt($slickItem.attr('data-slide-to-scroll')) || 1,
 				asNavFor: $slickItem.attr('data-for') || false,
 				dots: $slickItem.attr("data-dots") == "true",
@@ -1639,16 +1618,13 @@ $(function () {
 		}
 	}
 	
-	// lightGallery
 	if (plugins.lightGallery.length) {
 		for (var i = 0; i < plugins.lightGallery.length; i++) {
 			initLightGallery(plugins.lightGallery[i]);
 		}
 	}
 
-	// lightGallery item
 	if (plugins.lightGalleryItem.length) {
-		// Filter carousel items
 		var notCarouselItems = [];
 
 		for (var z = 0; z < plugins.lightGalleryItem.length; z++) {
@@ -1666,7 +1642,6 @@ $(function () {
 		}
 	}
 
-	// Dynamic lightGallery
 	if (plugins.lightDynamicGalleryItem.length) {
 		for (var i = 0; i < plugins.lightDynamicGalleryItem.length; i++) {
 			initDynamicLightGallery(plugins.lightDynamicGalleryItem[i]);
